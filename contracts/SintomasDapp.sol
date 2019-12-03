@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-contract SimpleStorage {
+contract SintomasDapp {
   uint storedData;
 
   function set(uint x) public {
