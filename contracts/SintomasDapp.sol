@@ -17,11 +17,16 @@ contract SintomasDapp {
   */
 
   struct Sintoma {
-    uint id;
+    uint idSintoma;
     string sintoma;
-    address remediador;
+  }
+
+  struct Remedio {
+    uint idRemedio;
+    uint idSintoma;
     string tipoRemedio;
     string remedio;
+    address remediador;
     uint sumaCalificacionRemedio;
     uint numeroVotosRemedio;
   }
@@ -32,13 +37,12 @@ contract SintomasDapp {
     uint numeroVotosGlobal;
   }
   
-  mapping (tipoVariable => nombreEstructura) nombreVariable;
-  // Crear mapping para los sintomas
-  // Crear mapping para el remediador
+  mapping (uint => Sintoma) sintomas;
+  mapping (uint => Remedio) remedios;
+  mapping (address => Remediador) remediadores;
 
-  // Crear variable de esto para guardar el id del ultimo sintoma
-  uint ultimoId;
-
+  uint ultimoSintomaId;
+  uint ultimoRemedioId;
 
   // que funciones hacen falta en el contrato (nombres y parametros)
   // function registro (msg.sender) -> No es necesario
