@@ -44,12 +44,28 @@ contract SintomasDapp {
   uint ultimoSintomaId;
   uint ultimoRemedioId;
 
-  // que funciones hacen falta en el contrato (nombres y parametros)
-  // function registro (msg.sender) -> No es necesario
-  function tengoUnSintoma (string dolorConccreto)
-  //function buscoRemedio (string dolorConccreto) -> Lo vamos a hacer en react
-  function tengoRemedio (uint id, string remedio string tipoRemedio)
-  function valoroRemedio (uint id, uint8 valoracion(1-10))
+  function tengoUnSintoma (string dolorConccreto) {
+    ultimaSintomaId++;
+    sintomas[ultimoSintomaId].idSintoma = ultimaSintomaId;
+    sintomas[ultimoSintomaId].sintoma = dolorConccreto;
+  }
+//function buscoRemedio (string dolorConccreto) -> Lo vamos a hacer en react
+
+  function tengoRemedio (uint idSintoma, string tipoRemedio, string remedio) {
+    ultimoRemedioId++;
+    remedios[ultimoRemedioId].idRemedio = ultimoRemedioId;
+    remedios[ultimoRemedioId].idSintoma = idSintoma;
+    remedios[ultimoRemedioId].tipoRemedio = tipoRemedio;
+    remedios[ultimoRemedioId].remedio = remedio;
+    remedios[ultimoRemedioId].remediador = msg.sender;
+  }
+
+  function valoroRemedio (uint idRemedio, uint8 valoracion) {
+    remedios[idRemedio].sumaCalificacionRemedio += valoracion;
+    remedios[idRemedio].numeroVotosRemedio++;
+    remediadores[remedios[idRemedio].remediador].sumaCalificacionGlobal += valoracion;
+    remediadores[remedios[idRemedio].remediador].numeroVotosGlobal++;
+  }
   // function equipararNotaRemedioYnotaMsg.sender -> A la hora de valorarRemedio sumaremos la nota en las dos estructuras
 
   /*
