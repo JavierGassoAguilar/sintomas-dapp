@@ -50,8 +50,8 @@ contract SintomasDapp {
     sintomas[ultimoSintomaId].sintoma = dolorConccreto;
   }
 
-
   function tengoRemedio (uint idSintoma, string memory tipoRemedio, string memory remedio) public {
+    require(idSintoma <= ultimoSintomaId, "El sintoma con ese ID no existe");
     ultimoRemedioId++;
     remedios[ultimoRemedioId].idRemedio = ultimoRemedioId;
     remedios[ultimoRemedioId].idSintoma = idSintoma;
