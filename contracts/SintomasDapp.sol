@@ -61,6 +61,8 @@ contract SintomasDapp {
   }
 
   function valoroRemedio (uint idRemedio, uint8 valoracion) public {
+    require(idRemedio <= ultimoRemedioId, "El remedio con ese ID no existe");
+    require(valoracion >= 0 && valoracion <= 10, "Tu valoracion tiene que estar entre 0 y 10");
     remedios[idRemedio].sumaCalificacionRemedio += valoracion;
     remedios[idRemedio].numeroVotosRemedio++;
     remediadores[remedios[idRemedio].remediador].sumaCalificacionGlobal += valoracion;
