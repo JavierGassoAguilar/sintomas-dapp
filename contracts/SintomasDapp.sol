@@ -44,14 +44,14 @@ contract SintomasDapp {
   uint ultimoSintomaId;
   uint ultimoRemedioId;
 
-  function tengoUnSintoma (string dolorConccreto) {
-    ultimaSintomaId++;
-    sintomas[ultimoSintomaId].idSintoma = ultimaSintomaId;
+  function tengoUnSintoma (string memory dolorConccreto) public {
+    ultimoSintomaId++;
+    sintomas[ultimoSintomaId].idSintoma = ultimoSintomaId;
     sintomas[ultimoSintomaId].sintoma = dolorConccreto;
   }
-//function buscoRemedio (string dolorConccreto) -> Lo vamos a hacer en react
 
-  function tengoRemedio (uint idSintoma, string tipoRemedio, string remedio) {
+
+  function tengoRemedio (uint idSintoma, string memory tipoRemedio, string memory remedio) public {
     ultimoRemedioId++;
     remedios[ultimoRemedioId].idRemedio = ultimoRemedioId;
     remedios[ultimoRemedioId].idSintoma = idSintoma;
@@ -60,13 +60,13 @@ contract SintomasDapp {
     remedios[ultimoRemedioId].remediador = msg.sender;
   }
 
-  function valoroRemedio (uint idRemedio, uint8 valoracion) {
+  function valoroRemedio (uint idRemedio, uint8 valoracion) public {
     remedios[idRemedio].sumaCalificacionRemedio += valoracion;
     remedios[idRemedio].numeroVotosRemedio++;
     remediadores[remedios[idRemedio].remediador].sumaCalificacionGlobal += valoracion;
     remediadores[remedios[idRemedio].remediador].numeroVotosGlobal++;
   }
-  // function equipararNotaRemedioYnotaMsg.sender -> A la hora de valorarRemedio sumaremos la nota en las dos estructuras
+  
 
   /*
     tipos de remedio: (Vamos a hacer el selector/menu en React)
@@ -76,14 +76,7 @@ contract SintomasDapp {
     -otros.
   */
 
-  // Hacer las 3 funciones de arriba
+  
 
 
-  function set(uint x) public {
-    storedData = x;
-  }
-
-  function get() public view returns (uint) {
-    return storedData;
-  }
 }
