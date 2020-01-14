@@ -1,20 +1,6 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.6.0;
 
 contract SintomasDapp {
-
-  /*
-    sintomas
-    1. Texto del sintoma
-   
-    remedios
-    2. Direccion del usuario que ha registrado el remedio
-    3. Texto del remedio
-
-    puntuaciones del remedio
-    4. Acumulador de calificacion
-    5. Numero de votos
-
-  */
 
   struct Sintoma {
     uint idSintoma;
@@ -77,8 +63,5 @@ contract SintomasDapp {
     -homeopatia.
     -otros.
   */
-
-  
-
 
 }
