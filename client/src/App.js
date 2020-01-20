@@ -5,27 +5,28 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { 
+    storageValue: 3, 
+    web3: null, 
+    accounts: null, 
+    contract: null 
+  };
 
   componentDidMount = async () => {
     try {
-      // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
-      // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-
-      // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = SintomasDappContract.networks[networkId];
-      const instance = new web3.eth.Contract(
+      const contract = new web3.eth.Contract(
         SintomasDappContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ 
+        web3, 
+        accounts, 
+        contract 
+      }, this.runExample);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -36,16 +37,27 @@ class App extends Component {
   };
 
   runExample = async () => {
-    const { accounts, contract } = this.state;
+
+    const response = await this.state.contract
+      .methods.tengoUnSintoma("Me duele la cabeza")
+      .send({ from: this.state.accounts[0] });
+
+    const ultimoSintomaId = await this.state.contract.methods.ultimoSintomaId().call();
+    console.log("El ultimo sintoma tiene el ID: " + ultimoSintomaId);
+
+    // Hacer un bucle para pintar TODOS LOS sintomas (desde 1 hasta el ultimo)
+
+    const resultado = await this.state.contract.methods.sintomas(1).call();
+    console.log(resultado);
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    // await contract.methods.set(5).send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    // const response = await contract.methods.get().call();
 
     // Update state with the result.
-    this.setState({ storageValue: response });
+    // this.setState({ storageValue: response });
   };
 
   render() {

@@ -23,17 +23,17 @@ contract SintomasDapp {
     uint numeroVotosGlobal;
   }
   
-  mapping (uint => Sintoma) sintomas;
-  mapping (uint => Remedio) remedios;
-  mapping (address => Remediador) remediadores;
+  mapping (uint => Sintoma) public sintomas;
+  mapping (uint => Remedio) public remedios;
+  mapping (address => Remediador) public remediadores;
 
-  uint ultimoSintomaId;
-  uint ultimoRemedioId;
+  uint public ultimoSintomaId;
+  uint public ultimoRemedioId;
 
-  function tengoUnSintoma (string memory dolorConccreto) public {
+  function tengoUnSintoma (string memory dolorConcreto) public {
     ultimoSintomaId++;
     sintomas[ultimoSintomaId].idSintoma = ultimoSintomaId;
-    sintomas[ultimoSintomaId].sintoma = dolorConccreto;
+    sintomas[ultimoSintomaId].sintoma = dolorConcreto;
   }
 
   function tengoRemedio (uint idSintoma, string memory tipoRemedio, string memory remedio) public {
