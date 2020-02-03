@@ -5022,12 +5022,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x919914a89A7A114C7bC52c603C307341b2fF35Ce",
-      "transactionHash": "0x8c3a4aa5789a74057af605f65de8002d84b49bdbadf9406ffe4860aff9aa0489"
+      "address": "0x75dB4895831aD6c95287a916cecf89a31e26648C",
+      "transactionHash": "0x610c4f7b171496dd2ae237f424c6fd38e91e5afeafdf727875d4733fd3d6baa9"
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2020-01-20T19:26:56.694Z",
+  "updatedAt": "2020-02-03T19:00:11.808Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

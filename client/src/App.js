@@ -6,10 +6,11 @@ import "./App.css";
 
 class App extends Component {
   state = { 
-    storageValue: 3, 
+    storageValue: null, 
     web3: null, 
     accounts: null, 
-    contract: null 
+    contract: null,
+    cajaTexto: '',
   };
 
   componentDidMount = async () => {
@@ -26,7 +27,7 @@ class App extends Component {
         web3, 
         accounts, 
         contract 
-      }, this.runExample);
+      });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -60,23 +61,41 @@ class App extends Component {
     // this.setState({ storageValue: response });
   };
 
+  cambiarNombre = (nombre) => {
+    this.setState({
+      storageValue: nombre
+    })
+  };
+
   render() {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
-        <p>Your Truffle Box is installed and ready.</p>
-        <h2>Smart Contract Example</h2>
-        <p>
-          If your contracts compiled and migrated successfully, below will show
-          a stored value of 5 (by default).
-        </p>
-        <p>
-          Try changing the value stored on <strong>line 40</strong> of App.js.
-        </p>
         <div>The stored value is: {this.state.storageValue}</div>
+        <hr></hr>
+
+        <input 
+          type="text" 
+          value={this.state.cajaTexto} 
+          onChange={e => this.setState({ cajaTexto: e.target.value })} 
+        />
+
+        <button onClick={() => this.cambiarNombre(this.state.cajaTexto)}>Cambiar valor de storage</button>
+
+        <button onClick={() => this.runExample()}>Ejecutar runExample</button>
+
+        <hr></hr>
+
+        <select>
+          <option>Selecciona un tipo de remedio</option>
+          <option value="1">Posturas de Yoga</option>
+          <option value="2">Infusión</option>
+          <option value="3">Homeopatía</option>
+          <option value="4">Otros</option>
+        </select>
+
       </div>
     );
   }
