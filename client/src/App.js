@@ -11,6 +11,8 @@ class App extends Component {
     accounts: null, 
     contract: null,
     textoSintoma: '',
+    ultimoSintomaId: 0,
+    sintomas: []
   };
 
   componentDidMount = async () => {
@@ -23,10 +25,12 @@ class App extends Component {
         SintomasDappContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
+      const ultimoSintomaId = await contract.methods.ultimoSintomaId().call();
       this.setState({ 
         web3, 
         accounts, 
-        contract 
+        contract,
+        ultimoSintomaId
       });
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -39,13 +43,9 @@ class App extends Component {
 
   runExample = async () => {
 
-    const ultimoSintomaId = await this.state.contract.methods.ultimoSintomaId().call();
-    console.log("El ultimo sintoma tiene el ID: " + ultimoSintomaId);
-
     // Hacer un bucle para pintar TODOS LOS sintomas (desde 1 hasta el ultimo)
 
-    const resultado = await this.state.contract.methods.sintomas(1).call();
-    console.log(resultado);
+
 
     // Stores a given value, 5 by default.
     // await contract.methods.set(5).send({ from: accounts[0] });
@@ -61,6 +61,15 @@ class App extends Component {
     const response = await this.state.contract
       .methods.tengoUnSintoma(sintoma)
       .send({ from: this.state.accounts[0] });
+  };
+
+  obtenerSintomasDapp = async () => {
+    let sintomas = [];
+    for (let i = 1; i <= this.state.ultimoSintomaId; i++) {
+      const resultado = await this.state.contract.methods.sintomas(i).call();
+      sintomas.push(resultado.sintoma);
+    }
+    this.setState({ sintomas });
   };
 
   render() {
@@ -99,8 +108,23 @@ class App extends Component {
           </div>
         </article>
 
+        <article class="message cajita">
+          <div class="message-header">
+            <p>Lista de sintomas registrados</p>
+            <button class="button is-success" onClick={() => this.obtenerSintomasDapp()}>Buscar</button>
+          </div>
+          <div class="message-body">
 
-        
+          <strong>{this.state.sintomas}</strong>
+
+          <ul>
+            {this.state.sintomas.map((item, key) =>
+              <li>- {item}</li>
+            )}
+          </ul>
+
+          </div>
+        </article>
 
       </div>
     );
