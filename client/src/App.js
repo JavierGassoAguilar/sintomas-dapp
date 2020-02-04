@@ -77,18 +77,19 @@ class App extends Component {
         <hr></hr>
 
         <input 
+          class="input is-primary"
           type="text" 
           value={this.state.cajaTexto} 
           onChange={e => this.setState({ cajaTexto: e.target.value })} 
         />
 
-        <button onClick={() => this.cambiarNombre(this.state.cajaTexto)}>Cambiar valor de storage</button>
+        <button class="button is-danger" onClick={() => this.cambiarNombre(this.state.cajaTexto)}>Cambiar valor de storage</button>
 
-        <button onClick={() => this.runExample()}>Ejecutar runExample</button>
+        <button class="button is-primary" onClick={() => this.runExample()}>Ejecutar runExample</button>
 
         <hr></hr>
 
-        <select>
+        <select class="select">
           <option>Selecciona un tipo de remedio</option>
           <option value="1">Posturas de Yoga</option>
           <option value="2">Infusión</option>
