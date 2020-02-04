@@ -10,7 +10,7 @@ class App extends Component {
     web3: null, 
     accounts: null, 
     contract: null,
-    cajaTexto: '',
+    textoSintoma: '',
   };
 
   componentDidMount = async () => {
@@ -39,10 +39,6 @@ class App extends Component {
 
   runExample = async () => {
 
-    const response = await this.state.contract
-      .methods.tengoUnSintoma("Me duele la cabeza")
-      .send({ from: this.state.accounts[0] });
-
     const ultimoSintomaId = await this.state.contract.methods.ultimoSintomaId().call();
     console.log("El ultimo sintoma tiene el ID: " + ultimoSintomaId);
 
@@ -61,10 +57,10 @@ class App extends Component {
     // this.setState({ storageValue: response });
   };
 
-  cambiarNombre = (nombre) => {
-    this.setState({
-      storageValue: nombre
-    })
+  registrarSintoma = async (sintoma) => {
+    const response = await this.state.contract
+      .methods.tengoUnSintoma(sintoma)
+      .send({ from: this.state.accounts[0] });
   };
 
   render() {
@@ -76,18 +72,7 @@ class App extends Component {
         <div>The stored value is: {this.state.storageValue}</div>
         <hr></hr>
 
-        <input 
-          class="input is-primary"
-          type="text" 
-          value={this.state.cajaTexto} 
-          onChange={e => this.setState({ cajaTexto: e.target.value })} 
-        />
-
-        <button class="button is-danger" onClick={() => this.cambiarNombre(this.state.cajaTexto)}>Cambiar valor de storage</button>
-
         <button class="button is-primary" onClick={() => this.runExample()}>Ejecutar runExample</button>
-
-        <hr></hr>
 
         <select class="select">
           <option>Selecciona un tipo de remedio</option>
@@ -96,6 +81,26 @@ class App extends Component {
           <option value="3">Homeopatía</option>
           <option value="4">Otros</option>
         </select>
+
+        <hr></hr>
+
+        <article class="message cajita">
+          <div class="message-header">
+            <p>Registrar síntoma</p>
+          </div>
+          <div class="message-body">
+            <input 
+              class="input is-warning separado-abajo"
+              type="text" 
+              value={this.state.textoSintoma} 
+              onChange={e => this.setState({ textoSintoma: e.target.value })} 
+            />
+            <button class="button is-success" onClick={() => this.registrarSintoma(this.state.textoSintoma)}>Registrar síntoma</button>
+          </div>
+        </article>
+
+
+        
 
       </div>
     );
