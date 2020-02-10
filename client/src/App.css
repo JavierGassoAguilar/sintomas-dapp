@@ -27,3 +27,12 @@
 .separado-abajo {
   margin-bottom: 15px;
 }
+.contenedor-sintoma {
+  background: tomato;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+}
+.boton-sintoma {
+  margin: 5px;
+}

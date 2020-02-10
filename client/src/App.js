@@ -25,12 +25,10 @@ class App extends Component {
         SintomasDappContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      const ultimoSintomaId = await contract.methods.ultimoSintomaId().call();
       this.setState({ 
         web3, 
         accounts, 
-        contract,
-        ultimoSintomaId
+        contract
       });
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -58,18 +56,29 @@ class App extends Component {
   };
 
   registrarSintoma = async (sintoma) => {
-    const response = await this.state.contract
-      .methods.tengoUnSintoma(sintoma)
-      .send({ from: this.state.accounts[0] });
+    const response = await this.state.contract.methods.tengoUnSintoma(sintoma).send({from: this.state.accounts[0]});
+    console.log(response);
   };
 
   obtenerSintomasDapp = async () => {
+    const ultimoSintomaId = await this.state.contract.methods.ultimoSintomaId().call();
+    this.setState({ ultimoSintomaId });
     let sintomas = [];
     for (let i = 1; i <= this.state.ultimoSintomaId; i++) {
       const resultado = await this.state.contract.methods.sintomas(i).call();
       sintomas.push(resultado.sintoma);
     }
     this.setState({ sintomas });
+  };
+
+  hintertarremedio = async (sintoma, tiporemedio, remedio) => {
+    const response = await this.state.contract.methods.tengoRemedio(sintoma, tiporemedio, remedio).send({from: this.state.accounts[0]});
+    console.log(response);
+  };
+
+  listarRemedios = async () => {
+    const ultimoRemedioId = await this.state.contract.methods.ultimoRemedioId().call();
+    alert("El ultimo remedio ID es: " + ultimoRemedioId);
   };
 
   render() {
@@ -115,13 +124,13 @@ class App extends Component {
           </div>
           <div class="message-body">
 
-          <strong>{this.state.sintomas}</strong>
-
-          <ul>
             {this.state.sintomas.map((item, key) =>
-              <li>- {item}</li>
+              <div class="contenedor-sintoma">
+                <p><strong>Sintoma: </strong> {item}</p>
+                <button class="button boton-sintoma" onClick={() => this.listarRemedios()}>Consultar remedios</button>
+                <button class="button boton-sintoma" onClick={() => this.hintertarremedio(1, 'Homeopatía', 'Sepia')}>Insertar remedio</button>
+              </div>
             )}
-          </ul>
 
           </div>
         </article>
