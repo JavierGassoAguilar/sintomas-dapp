@@ -13,7 +13,8 @@ class App extends Component {
     textoRemedio: '',
     tipoRemedioSeleccionado: '',
     ultimoSintomaId: 0,
-    sintomas: []
+    sintomas: [],
+    remedios: []
   };
 
   componentDidMount = async () => {
@@ -66,7 +67,21 @@ class App extends Component {
 
   listarRemedios = async () => {
     const ultimoRemedioId = await this.state.contract.methods.ultimoRemedioId().call();
-    alert("El ultimo remedio ID es: " + ultimoRemedioId);
+    let remedios = [];
+    for (let i = 1; i <= ultimoRemedioId; i++) {
+      const resultado = await this.state.contract.methods.remedios(i).call();
+      remedios.push({
+        idSintoma: resultado.idSintoma,
+        idRemedio: resultado.idRemedio,
+        tipoRemedio: resultado.tipoRemedio,
+        remedio: resultado.remedio,
+        remediador: resultado.remediador,
+        sumaCalificacionRemedio: resultado.sumaCalificacionRemedio,
+        numeroVotosRemedio: resultado.numeroVotosRemedio
+      })
+    }
+    this.setState({ remedios });
+
   };
 
   render() {
@@ -105,10 +120,10 @@ class App extends Component {
                 <hr />
                 <select onChange={e => this.setState({ tipoRemedioSeleccionado: e.target.value })} value={this.state.tipoRemedioSeleccionado} class="select">
                   <option>Selecciona un tipo de remedio</option>
-                  <option value="1">Posturas de Yoga</option>
-                  <option value="2">Infusión</option>
-                  <option value="3">Homeopatía</option>
-                  <option value="4">Otros</option>
+                  <option value="YOGA">Posturas de Yoga</option>
+                  <option value="INFUSION">Infusión</option>
+                  <option value="HOMEOPATIA">Homeopatía</option>
+                  <option value="OTROS">Otros</option>
                 </select>
                 <input 
                   class="input"
@@ -117,15 +132,17 @@ class App extends Component {
                   onChange={e => this.setState({ textoRemedio: e.target.value })} 
                 />
                 <button class="button boton-sintoma" onClick={() => this.hintertarremedio(item.idSintoma)}>Insertar remedio</button>
-
                 <hr />
                 <button class="button boton-sintoma" onClick={() => this.listarRemedios()}>Consultar remedios</button>
-
+                <hr />
+                {this.state.remedios.map(itemR => {
+                  if (itemR.idSintoma === item.idSintoma) {
+                    return <p>{itemR.tipoRemedio} | {itemR.remedio}</p>     
+                  }
+                  }
+                )}
               </div>
             )}
-
-
-
           </div>
         </article>
 
