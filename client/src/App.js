@@ -6,11 +6,12 @@ import "./App.css";
 
 class App extends Component {
   state = { 
-    storageValue: null, 
     web3: null, 
     accounts: null, 
     contract: null,
     textoSintoma: '',
+    textoRemedio: '',
+    tipoRemedioSeleccionado: '',
     ultimoSintomaId: 0,
     sintomas: []
   };
@@ -39,22 +40,6 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-
-    // Hacer un bucle para pintar TODOS LOS sintomas (desde 1 hasta el ultimo)
-
-
-
-    // Stores a given value, 5 by default.
-    // await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-    // const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    // this.setState({ storageValue: response });
-  };
-
   registrarSintoma = async (sintoma) => {
     const response = await this.state.contract.methods.tengoUnSintoma(sintoma).send({from: this.state.accounts[0]});
     console.log(response);
@@ -66,13 +51,16 @@ class App extends Component {
     let sintomas = [];
     for (let i = 1; i <= this.state.ultimoSintomaId; i++) {
       const resultado = await this.state.contract.methods.sintomas(i).call();
-      sintomas.push(resultado.sintoma);
+      sintomas.push({
+        idSintoma: resultado.idSintoma,
+        sintoma: resultado.sintoma,
+      });
     }
     this.setState({ sintomas });
   };
 
-  hintertarremedio = async (sintoma, tiporemedio, remedio) => {
-    const response = await this.state.contract.methods.tengoRemedio(sintoma, tiporemedio, remedio).send({from: this.state.accounts[0]});
+  hintertarremedio = async (sintoma) => {
+    const response = await this.state.contract.methods.tengoRemedio(sintoma, this.state.tipoRemedioSeleccionado, this.state.textoRemedio).send({from: this.state.accounts[0]});
     console.log(response);
   };
 
@@ -87,20 +75,6 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <div>The stored value is: {this.state.storageValue}</div>
-        <hr></hr>
-
-        <button class="button is-primary" onClick={() => this.runExample()}>Ejecutar runExample</button>
-
-        <select class="select">
-          <option>Selecciona un tipo de remedio</option>
-          <option value="1">Posturas de Yoga</option>
-          <option value="2">Infusión</option>
-          <option value="3">Homeopatía</option>
-          <option value="4">Otros</option>
-        </select>
-
-        <hr></hr>
 
         <article class="message cajita">
           <div class="message-header">
@@ -124,13 +98,33 @@ class App extends Component {
           </div>
           <div class="message-body">
 
-            {this.state.sintomas.map((item, key) =>
+            {this.state.sintomas.map(item =>
               <div class="contenedor-sintoma">
-                <p><strong>Sintoma: </strong> {item}</p>
+                <p><strong>Sintoma: </strong> {item.sintoma} </p>
+                
+                <hr />
+                <select onChange={e => this.setState({ tipoRemedioSeleccionado: e.target.value })} value={this.state.tipoRemedioSeleccionado} class="select">
+                  <option>Selecciona un tipo de remedio</option>
+                  <option value="1">Posturas de Yoga</option>
+                  <option value="2">Infusión</option>
+                  <option value="3">Homeopatía</option>
+                  <option value="4">Otros</option>
+                </select>
+                <input 
+                  class="input"
+                  type="text" 
+                  value={this.state.textoRemedio} 
+                  onChange={e => this.setState({ textoRemedio: e.target.value })} 
+                />
+                <button class="button boton-sintoma" onClick={() => this.hintertarremedio(item.idSintoma)}>Insertar remedio</button>
+
+                <hr />
                 <button class="button boton-sintoma" onClick={() => this.listarRemedios()}>Consultar remedios</button>
-                <button class="button boton-sintoma" onClick={() => this.hintertarremedio(1, 'Homeopatía', 'Sepia')}>Insertar remedio</button>
+
               </div>
             )}
+
+
 
           </div>
         </article>
