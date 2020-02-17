@@ -84,6 +84,14 @@ class App extends Component {
 
   };
 
+  valorarRemedio = async idRemedio => {
+    const temporal = window.prompt('Valoracion (0-10)');
+    console.log("idRemedio", idRemedio);
+    console.log("temporal", temporal);
+    const response = await this.state.contract.methods.valoroRemedio(parseInt(idRemedio, 10), parseInt(temporal, 10)).send({from: this.state.accounts[0]});
+    console.log(response);
+  };
+
   render() {
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
@@ -115,32 +123,44 @@ class App extends Component {
 
             {this.state.sintomas.map(item =>
               <div class="contenedor-sintoma">
-                <p><strong>Sintoma: </strong> {item.sintoma} </p>
-                
-                <hr />
-                <select onChange={e => this.setState({ tipoRemedioSeleccionado: e.target.value })} value={this.state.tipoRemedioSeleccionado} class="select">
-                  <option>Selecciona un tipo de remedio</option>
+                <p><strong>{item.sintoma}</strong> </p>
+                <br />
+                <select onChange={e => this.setState({ tipoRemedioSeleccionado: e.target.value })} value={this.state.tipoRemedioSeleccionado} class="select is-small caja-20">
+                  <option>Tipo remedio</option>
                   <option value="YOGA">Posturas de Yoga</option>
                   <option value="INFUSION">Infusión</option>
                   <option value="HOMEOPATIA">Homeopatía</option>
                   <option value="OTROS">Otros</option>
                 </select>
                 <input 
-                  class="input"
+                  class="input is-small remedio-input"
                   type="text" 
                   value={this.state.textoRemedio} 
                   onChange={e => this.setState({ textoRemedio: e.target.value })} 
                 />
-                <button class="button boton-sintoma" onClick={() => this.hintertarremedio(item.idSintoma)}>Insertar remedio</button>
-                <hr />
-                <button class="button boton-sintoma" onClick={() => this.listarRemedios()}>Consultar remedios</button>
-                <hr />
-                {this.state.remedios.map(itemR => {
-                  if (itemR.idSintoma === item.idSintoma) {
-                    return <p>{itemR.tipoRemedio} | {itemR.remedio}</p>     
-                  }
-                  }
-                )}
+                <button class="button boton-sintoma is-small caja-20" onClick={() => this.hintertarremedio(item.idSintoma)}>Insertar remedio</button>
+                <button class="button boton-sintoma is-small" onClick={() => this.listarRemedios()}>Consultar remedios</button>
+
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Tipo</th>
+                      <th>Descripcion</th>
+                      <th>Valoracion media</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.remedios.map(itemR => {
+                      if (itemR.idSintoma === item.idSintoma) {
+                        return <tr><td>{itemR.tipoRemedio}</td><td>{itemR.remedio}</td><td>{itemR.sumaCalificacionRemedio/itemR.numeroVotosRemedio}</td><td><button class="button boton-sintoma is-small" onClick={() => this.valorarRemedio(itemR.idRemedio)}>Valorar</button></td></tr>  
+                      }
+                      }
+                    )}
+                  </tbody>
+              </table>
+
               </div>
             )}
           </div>
