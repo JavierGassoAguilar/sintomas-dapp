@@ -54,14 +54,4 @@ contract SintomasDapp {
     remediadores[remedios[idRemedio].remediador].sumaCalificacionGlobal += valoracion;
     remediadores[remedios[idRemedio].remediador].numeroVotosGlobal++;
   }
-  
-
-  /*
-    tipos de remedio: (Vamos a hacer el selector/menu en React)
-    -posturas de yoga.
-    -infusiones.
-    -homeopatia.
-    -otros.
-  */
-
 }

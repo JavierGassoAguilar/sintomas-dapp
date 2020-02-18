@@ -14,7 +14,8 @@ class App extends Component {
     tipoRemedioSeleccionado: '',
     ultimoSintomaId: 0,
     sintomas: [],
-    remedios: []
+    remedios: [],
+    textoBuscador: '',
   };
 
   componentDidMount = async () => {
@@ -52,10 +53,16 @@ class App extends Component {
     let sintomas = [];
     for (let i = 1; i <= this.state.ultimoSintomaId; i++) {
       const resultado = await this.state.contract.methods.sintomas(i).call();
-      sintomas.push({
-        idSintoma: resultado.idSintoma,
-        sintoma: resultado.sintoma,
-      });
+      // Palabra del buscador:   this.state.textoBuscador  "espalda"
+      // Texto del sintoma:      resultado.sintoma         "dolor de espalda"
+      if (this.state.textoBuscador.length === 0 || resultado.sintoma.split(' ').includes(this.state.textoBuscador)) {
+        sintomas.push({
+          idSintoma: resultado.idSintoma,
+          sintoma: resultado.sintoma,
+        });
+      }
+
+
     }
     this.setState({ sintomas });
   };
@@ -117,6 +124,12 @@ class App extends Component {
         <article class="message cajita">
           <div class="message-header">
             <p>Lista de sintomas registrados</p>
+            <input 
+              class="input is-small caja-buscador" 
+              type="text"
+              value={this.state.textoBuscador}
+              onChange={e => this.setState({ textoBuscador: e.target.value })} 
+            />
             <button class="button is-success" onClick={() => this.obtenerSintomasDapp()}>Buscar</button>
           </div>
           <div class="message-body">

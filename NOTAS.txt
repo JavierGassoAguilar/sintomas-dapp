@@ -1,0 +1,3 @@
+- Si al sistema de votacion actual le ponemos un pago minimo de 1ETH por ejemplo, como todo el mundo
+  puede votar pagando... el sistema de convertiria algo parecido a Google AdWords y serviría para
+  posicionar tus elementos en lo alto de la lista
