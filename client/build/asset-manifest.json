@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/sintomas-dapp/static/css/main.fa02ee20.chunk.css",
-    "main.js": "/sintomas-dapp/static/js/main.f9796c9e.chunk.js",
-    "main.js.map": "/sintomas-dapp/static/js/main.f9796c9e.chunk.js.map",
-    "runtime-main.js": "/sintomas-dapp/static/js/runtime-main.fa95e7d6.js",
-    "runtime-main.js.map": "/sintomas-dapp/static/js/runtime-main.fa95e7d6.js.map",
-    "static/js/2.89282730.chunk.js": "/sintomas-dapp/static/js/2.89282730.chunk.js",
-    "static/js/2.89282730.chunk.js.map": "/sintomas-dapp/static/js/2.89282730.chunk.js.map",
-    "index.html": "/sintomas-dapp/index.html",
-    "precache-manifest.a4986a1b6a1243bf537d4a3dfbf2e21d.js": "/sintomas-dapp/precache-manifest.a4986a1b6a1243bf537d4a3dfbf2e21d.js",
-    "service-worker.js": "/sintomas-dapp/service-worker.js",
-    "static/css/main.fa02ee20.chunk.css.map": "/sintomas-dapp/static/css/main.fa02ee20.chunk.css.map"
+    "main.css": "/sintomas-dapp/client/build/static/css/main.fa02ee20.chunk.css",
+    "main.js": "/sintomas-dapp/client/build/static/js/main.8610b506.chunk.js",
+    "main.js.map": "/sintomas-dapp/client/build/static/js/main.8610b506.chunk.js.map",
+    "runtime-main.js": "/sintomas-dapp/client/build/static/js/runtime-main.c91f0d06.js",
+    "runtime-main.js.map": "/sintomas-dapp/client/build/static/js/runtime-main.c91f0d06.js.map",
+    "static/js/2.89282730.chunk.js": "/sintomas-dapp/client/build/static/js/2.89282730.chunk.js",
+    "static/js/2.89282730.chunk.js.map": "/sintomas-dapp/client/build/static/js/2.89282730.chunk.js.map",
+    "index.html": "/sintomas-dapp/client/build/index.html",
+    "precache-manifest.42a3a9e7d90c3122092092673c6b367d.js": "/sintomas-dapp/client/build/precache-manifest.42a3a9e7d90c3122092092673c6b367d.js",
+    "service-worker.js": "/sintomas-dapp/client/build/service-worker.js",
+    "static/css/main.fa02ee20.chunk.css.map": "/sintomas-dapp/client/build/static/css/main.fa02ee20.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.fa95e7d6.js",
+    "static/js/runtime-main.c91f0d06.js",
     "static/js/2.89282730.chunk.js",
     "static/css/main.fa02ee20.chunk.css",
-    "static/js/main.f9796c9e.chunk.js"
+    "static/js/main.8610b506.chunk.js"
   ]
 }
