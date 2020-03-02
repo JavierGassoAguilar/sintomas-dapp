@@ -167,7 +167,12 @@ class App extends Component {
                   <tbody>
                     {this.state.remedios.map(itemR => {
                       if (itemR.idSintoma === item.idSintoma) {
-                        return <tr><td>{itemR.tipoRemedio}</td><td>{itemR.remedio}</td><td>{itemR.sumaCalificacionRemedio/itemR.numeroVotosRemedio}</td><td><button class="button boton-sintoma is-small" onClick={() => this.valorarRemedio(itemR.idRemedio)}>Valorar</button></td></tr>  
+                        return <tr>
+                                  <td>{itemR.tipoRemedio}</td>
+                                  <td>{itemR.remedio}</td>
+                                  <td>{(itemR.sumaCalificacionRemedio/itemR.numeroVotosRemedio).toFixed(1)} ({itemR.numeroVotosRemedio} votos)</td>
+                                  <td><button class="button boton-sintoma is-small" onClick={() => this.valorarRemedio(itemR.idRemedio)}>Valorar</button></td>
+                               </tr>  
                       }
                       }
                     )}
