@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sintomas-dapp/client/build/static/css/main.fa02ee20.chunk.css",
-    "main.js": "/sintomas-dapp/client/build/static/js/main.8610b506.chunk.js",
-    "main.js.map": "/sintomas-dapp/client/build/static/js/main.8610b506.chunk.js.map",
+    "main.js": "/sintomas-dapp/client/build/static/js/main.4df71516.chunk.js",
+    "main.js.map": "/sintomas-dapp/client/build/static/js/main.4df71516.chunk.js.map",
     "runtime-main.js": "/sintomas-dapp/client/build/static/js/runtime-main.c91f0d06.js",
     "runtime-main.js.map": "/sintomas-dapp/client/build/static/js/runtime-main.c91f0d06.js.map",
     "static/js/2.89282730.chunk.js": "/sintomas-dapp/client/build/static/js/2.89282730.chunk.js",
     "static/js/2.89282730.chunk.js.map": "/sintomas-dapp/client/build/static/js/2.89282730.chunk.js.map",
     "index.html": "/sintomas-dapp/client/build/index.html",
-    "precache-manifest.42a3a9e7d90c3122092092673c6b367d.js": "/sintomas-dapp/client/build/precache-manifest.42a3a9e7d90c3122092092673c6b367d.js",
+    "precache-manifest.29d69c9f545b8118719edc77318132ae.js": "/sintomas-dapp/client/build/precache-manifest.29d69c9f545b8118719edc77318132ae.js",
     "service-worker.js": "/sintomas-dapp/client/build/service-worker.js",
     "static/css/main.fa02ee20.chunk.css.map": "/sintomas-dapp/client/build/static/css/main.fa02ee20.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.c91f0d06.js",
     "static/js/2.89282730.chunk.js",
     "static/css/main.fa02ee20.chunk.css",
-    "static/js/main.8610b506.chunk.js"
+    "static/js/main.4df71516.chunk.js"
   ]
 }

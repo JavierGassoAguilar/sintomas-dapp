@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "48163275fa1072558d85c013a614b910",
+    "revision": "1289510f1f1d0d778e7708f5daeb9823",
     "url": "/sintomas-dapp/client/build/index.html"
   },
   {
-    "revision": "e366d1afce2c8275a6f2",
+    "revision": "eecdb7d2d045a0182dea",
     "url": "/sintomas-dapp/client/build/static/css/main.fa02ee20.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sintomas-dapp/client/build/static/js/2.89282730.chunk.js"
   },
   {
-    "revision": "e366d1afce2c8275a6f2",
-    "url": "/sintomas-dapp/client/build/static/js/main.8610b506.chunk.js"
+    "revision": "eecdb7d2d045a0182dea",
+    "url": "/sintomas-dapp/client/build/static/js/main.4df71516.chunk.js"
   },
   {
     "revision": "2639fdd8bcc052fe7072",
